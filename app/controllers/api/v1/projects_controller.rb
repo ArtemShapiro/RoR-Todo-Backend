@@ -7,11 +7,15 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def create
-    @project.save ? head(:created) : head(:internal_server_error)
+    head(:internal_server_error) unless @project.save
   end
 
   def update
     @project.update(project_params) ? head(:ok) : head(:internal_server_error)
+  end
+
+  def destroy
+    @project.destroy ? head(:ok) : head(:internal_server_error)
   end
 
   private
