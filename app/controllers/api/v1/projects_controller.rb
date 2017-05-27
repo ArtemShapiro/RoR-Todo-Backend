@@ -7,11 +7,13 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def create
-    head(:internal_server_error) unless @project.save
+    return head(:unprocessable_entity) unless @project.save
+    render status: :created
   end
 
   def update
-    @project.update(project_params) ? head(:ok) : head(:internal_server_error)
+    return head(:unprocessable_entity) unless @project.update(project_params)
+    render status: :ok
   end
 
   def destroy

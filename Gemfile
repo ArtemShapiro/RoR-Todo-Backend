@@ -27,20 +27,26 @@ gem 'rack-cors'
 gem 'devise_token_auth', '~> 0.1.39'
 gem 'cancancan', '~> 1.16'
 gem 'omniauth', '~> 1.3', '>= 1.3.1'
+gem 'omniauth-facebook', '~> 4.0'
 
-gem 'poltergeist', '~> 1.14'
+gem 'carrierwave', '~> 1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'capybara', '~> 2.13'
   gem 'faker', '~> 1.7', '>= 1.7.3'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'byebug', platform: :mri
 end
 
 group :development do
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '~> 3.0.5'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

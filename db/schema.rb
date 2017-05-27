@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411061739) do
+ActiveRecord::Schema.define(version: 20170515175003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "file"
+    t.string   "attachable_type"
+    t.integer  "attachable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable_type_and_attachable_id", using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "text",       null: false
+    t.integer  "task_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_comments_on_task_id", using: :btree
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",       null: false
@@ -21,6 +38,17 @@ ActiveRecord::Schema.define(version: 20170411061739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_projects_on_user_id", using: :btree
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",                       null: false
+    t.boolean  "done",       default: false, null: false
+    t.datetime "deadline"
+    t.integer  "priority"
+    t.integer  "project_id",                 null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,5 +80,7 @@ ActiveRecord::Schema.define(version: 20170411061739) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "comments", "tasks"
   add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "projects"
 end
