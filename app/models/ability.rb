@@ -28,6 +28,11 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-    can :manage, Project, user: user if user
+    if user
+      can :manage, Project, user: user
+      can :manage, Task, project: { user: user }
+      can :manage, Comment, task: { project: { user: user } }
+      can :create, Attachment
+    end
   end
 end

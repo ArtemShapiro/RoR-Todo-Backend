@@ -6,4 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: 'user@example.com', password: '12345678')
+user = User.create(email: 'user@example.com', password: '12345678')
+FactoryGirl.create(:project_with_tasks, user: user)

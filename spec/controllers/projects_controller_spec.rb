@@ -25,13 +25,13 @@ RSpec.describe 'Projects', type: :request do
     it 'Should respond with 201(Created)' do
       post api_v1_projects_path, params: { project: project_attr }, headers: headers
 
-      expect(response).to have_http_status :created
+      expect(response).to be_success
     end
 
-    it 'Should respond with 500(Internal Server Error)' do
+    it 'Should respond with 422(Unprocessable entity)' do
       post api_v1_projects_path, headers: headers, params: { project: { name: '' } }
 
-      expect(response).to have_http_status :internal_server_error
+      expect(response).to have_http_status :unprocessable_entity
     end
 
     it 'Should respond with 401(Unauthorized)' do
@@ -48,14 +48,14 @@ RSpec.describe 'Projects', type: :request do
       expect(response).to be_success
     end
 
-    it 'Should respond with 500(Internal Server Error)' do
+    it 'Should respond with 422(Unprocessable entity)' do
       patch api_v1_project_path(project), params: { project: { name: '' } }, headers: headers
 
-      expect(response).to have_http_status :internal_server_error
+      expect(response).to have_http_status :unprocessable_entity
     end
 
     it 'Should respond with 401(Unauthorized)' do
-      path api_v1_project_path(project)
+      patch api_v1_project_path(project)
 
       expect(response).to have_http_status :unauthorized
     end

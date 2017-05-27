@@ -46,3 +46,18 @@ DeviseTokenAuth.setup do |config|
     # do so by enabling this flag. NOTE: This feature is highly experimental!
     # config.enable_standard_devise_support = false
 end
+
+DeviseTokenAuth::Url.class_eval do
+  def self.generate(url, params = {})
+    uri = URI(url)
+
+    res = "#{uri.scheme}://#{uri.host}"
+    res += ":#{uri.port}" if (uri.port && uri.port != 80 && uri.port != 443)
+    res += "#{uri.path}#/" if uri.path
+    query = [uri.query, params.to_query].reject(&:blank?).join('&')
+    res += "?#{query}"
+    res += "##{uri.fragment}" if uri.fragment
+
+    return res
+  end
+end
