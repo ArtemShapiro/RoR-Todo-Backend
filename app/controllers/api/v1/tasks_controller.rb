@@ -5,13 +5,15 @@ class Api::V1::TasksController < ApplicationController
   load_and_authorize_resource :task, through: :project, shallow: true
 
   def create
-    return head(:unprocessable_entity) unless @task.save
+    return render json: { error: @task.errors.full_messages }, status: :unprocessable_entity unless @task.save
     render status: :created
   end
 
   def update
-    return head(:unprocessable_entity) unless @task.update(task_params)
-    render status: :ok
+    Tasks::UpdateTask.call(task_params, @task) do
+      on(:ok) { render status: :ok }
+      on(:failure) { render json: { error: @task.errors.full_messages }, status: :unprocessable_entity }
+    end
   end
 
   def destroy

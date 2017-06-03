@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'rectify', '~> 0.9.1'
+
 gem 'devise_token_auth', '~> 0.1.39'
 gem 'cancancan', '~> 1.16'
 gem 'omniauth', '~> 1.3', '>= 1.3.1'

@@ -7,12 +7,12 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def create
-    return head(:unprocessable_entity) unless @project.save
+    return render json: { error: @project.errors.full_messages }, status: :unprocessable_entity unless @project.save
     render status: :created
   end
 
   def update
-    return head(:unprocessable_entity) unless @project.update(project_params)
+    return render json: { error: @project.errors.full_messages }, status: :unprocessable_entity unless @project.update(project_params)
     render status: :ok
   end
 
