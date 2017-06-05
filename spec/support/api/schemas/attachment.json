@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "required": ["id", "file"],
+  "properties": {
+    "id": { "type": "integer" },
+    "file": { "type": "object" }
+  }
+}

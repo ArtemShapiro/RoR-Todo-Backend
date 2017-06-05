@@ -32,7 +32,7 @@ class Ability
       can :manage, Project, user: user
       can :manage, Task, project: { user: user }
       can :manage, Comment, task: { project: { user: user } }
-      can :create, Attachment
+      can :manage, Attachment
     end
   end
 end

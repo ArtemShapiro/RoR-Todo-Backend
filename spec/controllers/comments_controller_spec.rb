@@ -13,6 +13,7 @@ RSpec.describe 'Comments', type: :request do
       get api_v1_task_comments_path(task), headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('comments')
     end
 
     it 'Should respond with 401(Unauthorized)' do
@@ -27,6 +28,7 @@ RSpec.describe 'Comments', type: :request do
       post api_v1_task_comments_path(task), params: { comment: comment_attr }, headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('comment')
     end
 
     it 'Should respond with 422(Unprocessable entity)' do

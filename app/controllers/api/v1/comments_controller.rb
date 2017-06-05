@@ -1,14 +1,14 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :authenticate_user!
-  
+
   load_and_authorize_resource :task
+  load_and_authorize_resource :attachment
   load_and_authorize_resource :comment, through: :task, shallow: true
 
   def index
   end
 
   def create
-    @comment.attachment = Attachment.find_by(id: params[:file]) if params[:file]
     return head(:unprocessable_entity) unless @comment.save
     render status: :created
   end
@@ -20,6 +20,6 @@ class Api::V1::CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:text)
+    params.require(:comment).permit(:text).to_h.merge(attachment: @attachment)
   end
 end

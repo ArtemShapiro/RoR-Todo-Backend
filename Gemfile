@@ -34,7 +34,7 @@ gem 'omniauth-facebook', '~> 4.0'
 gem 'carrierwave', '~> 1.1'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'json_matchers', '~> 0.7.0'
   gem 'faker', '~> 1.7', '>= 1.7.3'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'

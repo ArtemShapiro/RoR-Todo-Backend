@@ -11,6 +11,7 @@ RSpec.describe 'Tasks', type: :request do
       post api_v1_project_tasks_path(project), params: { task: task_attr }, headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('task')
     end
 
     it 'Should respond with 422(Unprocessable entity)' do
@@ -31,6 +32,7 @@ RSpec.describe 'Tasks', type: :request do
       patch api_v1_task_path(task), params: { task: task_attr }, headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('task') 
     end
 
     it 'Should respond with 422(Unprocessable entity)' do

@@ -12,6 +12,7 @@ RSpec.describe 'Projects', type: :request do
       get api_v1_projects_path, headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('projects')
     end
 
     it 'Should respond with 401(Unauthorized)' do
@@ -26,6 +27,7 @@ RSpec.describe 'Projects', type: :request do
       post api_v1_projects_path, params: { project: project_attr }, headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('project')
     end
 
     it 'Should respond with 422(Unprocessable entity)' do
@@ -46,6 +48,7 @@ RSpec.describe 'Projects', type: :request do
       patch api_v1_project_path(project), params: { project: project_attr }, headers: headers
 
       expect(response).to be_success
+      expect(response).to match_response_schema('project')
     end
 
     it 'Should respond with 422(Unprocessable entity)' do

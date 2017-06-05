@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": ["id", "name", "done", "priority", "project_id"],
+  "properties": {
+    "id": { "type": "integer" },
+    "name": { "type": "string" },
+    "done": { "type": "boolean" },
+    "deadline": { "type": ["string", "null"], "format": "date-time" },
+    "priority": { "type": "integer" },
+    "project_id": { "type": "integer" }
+  }
+}
