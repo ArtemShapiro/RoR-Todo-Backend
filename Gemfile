@@ -32,6 +32,7 @@ gem 'omniauth', '~> 1.3', '>= 1.3.1'
 gem 'omniauth-facebook', '~> 4.0'
 
 gem 'carrierwave', '~> 1.1'
+gem 'cloudinary', '~> 1.8', '>= 1.8.1'
 
 group :development, :test do
   gem 'json_matchers', '~> 0.7.0'
